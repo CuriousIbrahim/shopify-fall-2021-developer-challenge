@@ -1,5 +1,4 @@
 const express = require('express');
-const { isNull } = require("../utils");
 const Database = require("../db");
 
 const database = new Database();
@@ -13,6 +12,5 @@ router.get("/", async (req, res, next) => {
 
     return res.send(results);
 });
-
 
 module.exports = router;
