@@ -1,9 +1,13 @@
 const express = require('express');
-const multer = require('multer')
+const multer = require('multer');
+const vision = require("@google-cloud/vision");
 const path = require("path");
 const { isNull } = require("../utils");
+const Database = require("../db");
 
+const client = new vision.ImageAnnotatorClient();
 
+const database = new Database();
 
 const storage = multer.diskStorage({
     destination: `${__dirname}/../images/`,
@@ -16,7 +20,7 @@ const uploadImage = multer({ storage }).single("file");
 
 const router = express.Router();
 
-router.post("/uploadImage", uploadImage, (req, res, next) => {
+router.post("/", uploadImage, async (req, res, next) => {
     const timestamp = Date.now();
 
     const { body, file } = req;
@@ -46,15 +50,18 @@ router.post("/uploadImage", uploadImage, (req, res, next) => {
         private = false;
     }
 
-    console.log(name, filename, path, tags, private, timestamp);
+    const [result] = await client.labelDetection(path);
+
+    const labels = result.labelAnnotations;
+
+    const labelsToAdd = labels.map(label => label.description);
+
+    tags = tags.concat(labelsToAdd);
+
+    database.addImage(name, filename, path, tags, private, timestamp);
 
     return res.sendStatus(200);
 });
 
-router.post("/", (req, res) => {
-    console.log(req.body);
-
-
-});
 
 module.exports = router;
