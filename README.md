@@ -47,12 +47,12 @@ POST
 
 #### Body Content
 
-| Key     | Type                     |
-| ------- | ------------------------ |
-| file    | `File or Binary`         |
-| name    | `String`                 |
-| tags    | `String1,String2,....`   |
-| private | `Boolean (true or false` |
+| Key     | Type                      |
+| ------- | ------------------------- |
+| file    | `File or Binary`          |
+| name    | `String`                  |
+| tags    | `String1,String2,....`    |
+| private | `Boolean (true or false)` |
 
 ### /search
 
