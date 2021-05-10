@@ -1,6 +1,13 @@
 const express = require("express");
 const addRouter = require("./routes/add");
 const searchRouter = require("./routes/search");
+const { hasGoogleAplicationCredentials } = require("./utils");
+
+if (!hasGoogleAplicationCredentials()) {
+  console.error(
+    "Cannot find enviornment variable GOOGLE_APPLICATION_CREDENTIALS. To take advantage of Vision API functionality in the app, please set GOOGLE_APPLICATION_CREDENTIALS. Read the README for more information."
+  );
+}
 
 const app = express();
 const port = 3000;
