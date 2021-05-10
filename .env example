@@ -1,0 +1,2 @@
+GOOGLE_APPLICATION_CREDENTIALS=<insert path to google application credentials with access to vision API>
+MONGODB_URL=<insert mongodb url>

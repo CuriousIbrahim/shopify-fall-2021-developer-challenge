@@ -1,56 +1,59 @@
-const { MONGODB_URL } = require("./constants");
+const { getMongodbUrl } = require("./constants");
 
 let mongoose;
 let Image;
 
 class Database {
-    constructor() {
-        if (mongoose === undefined) {
-            mongoose = require("mongoose");
-            mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+  constructor() {
+    if (mongoose === undefined) {
+      mongoose = require("mongoose");
+      mongoose.connect(getMongodbUrl(), {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
 
-            const { Schema } = mongoose;
+      const { Schema } = mongoose;
 
-            const imageSchema = new Schema({
-                name: String,
-                filename: String,
-                path: String,
-                tags: [String],
-                private: Boolean,
-                timestamp: Date,
-            });
-            imageSchema.index({
-                name: "text",
-                tags: "text",
-            });
+      const imageSchema = new Schema({
+        name: String,
+        filename: String,
+        path: String,
+        tags: [String],
+        private: Boolean,
+        timestamp: Date,
+      });
+      imageSchema.index({
+        name: "text",
+        tags: "text",
+      });
 
-            Image = mongoose.model("Image", imageSchema);
-        }
+      Image = mongoose.model("Image", imageSchema);
     }
+  }
 
-    addImage(name, filename, path, tags, private_, timestamp) {
-        const doc = new Image({
-            name,
-            filename,
-            path,
-            tags,
-            private: private_,
-            timestamp
-        });
+  addImage(name, filename, path, tags, private_, timestamp) {
+    const doc = new Image({
+      name,
+      filename,
+      path,
+      tags,
+      private: private_,
+      timestamp,
+    });
 
-        doc.save();
-    }
+    doc.save();
+  }
 
-    async searchImage(query) {
-        const results = await Image.find({
-            private: false,
-            $text: {
-                $search: query,
-            },
-        }).exec();
+  async searchImage(query) {
+    const results = await Image.find({
+      private: false,
+      $text: {
+        $search: query,
+      },
+    }).exec();
 
-        return results;
-    }
+    return results;
+  }
 }
 
 module.exports = Database;
