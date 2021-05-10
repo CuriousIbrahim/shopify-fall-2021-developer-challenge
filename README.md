@@ -6,35 +6,6 @@
 
 This code repository is an Image Repostory API that allows you to upload images with other metadata as well as allowing Google Cloud Vision API to produce more metadata tags about the image. The repostoiry as allows you to perform a full text search on all public images.
 
-## HTTP API
-
-### /add
-
-#### Method
-
-POST
-
-#### Body Content
-
-| Key     | Type                     |
-| ------- | ------------------------ |
-| file    | `File or Binary`         |
-| name    | `String`                 |
-| tags    | `String1,String2,....`   |
-| private | `Boolean (true or false` |
-
-### /search
-
-#### Method
-
-GET
-
-#### Query Params
-
-| Key | Type                      |
-| --- | ------------------------- |
-| q   | `String (spaces included` |
-
 ## Technologies Used
 
 - [Node.js](https://nodejs.org/en/)
@@ -65,6 +36,35 @@ and then start the server
 ```
 yarn start
 ```
+
+## HTTP API
+
+### /add
+
+#### Method
+
+POST
+
+#### Body Content
+
+| Key     | Type                     |
+| ------- | ------------------------ |
+| file    | `File or Binary`         |
+| name    | `String`                 |
+| tags    | `String1,String2,....`   |
+| private | `Boolean (true or false` |
+
+### /search
+
+#### Method
+
+GET
+
+#### Query Params
+
+| Key | Type                      |
+| --- | ------------------------- |
+| q   | `String (spaces included` |
 
 # Visualized Architecture
 
