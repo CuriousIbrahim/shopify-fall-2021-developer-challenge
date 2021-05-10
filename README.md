@@ -1,4 +1,4 @@
-# Shopiy Fall 2021 Internship Developer Challenge
+# Shopify Fall 2021 Internship Developer Challenge
 
 [Link to the challenge](https://docs.google.com/document/d/1ZKRywXQLZWOqVOHC4JkF3LqdpO3Llpfk_CkZPR8bjak/edit#)
 
